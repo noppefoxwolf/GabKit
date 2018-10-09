@@ -1,0 +1,76 @@
+{
+  "id": "eabfbfac-ff32-47ae-995d-7cd7847723eb",
+  "published_at": "2018-10-03T22:57:53+00:00",
+  "type": "post",
+  "actuser": {
+    "id": 1,
+    "name": "Sample User",
+    "username": "sample-user",
+    "picture_url": "https://files.gab.com/file/files-gab/user/sample-user.jpeg",
+    "verified": true,
+    "is_donor": true,
+    "is_investor": true,
+    "is_pro": true,
+    "is_private": true,
+    "is_premium": true
+  },
+  "post": {
+    "id": 2358345,
+    "created_at": "2018-10-03T22:57:53+00:00",
+    "revised_at": null,
+    "edited": false,
+    "body": "Sample post with multiple media attachments",
+    "body_html": null,
+    "body_html_summary": null,
+    "body_html_summary_truncated": false,
+    "liked": false,
+    "disliked": false,
+    "bookmarked": false,
+    "repost": false,
+    "reported": false,
+    "score": 0,
+    "like_count": 0,
+    "dislike_count": 0,
+    "reply_count": 0,
+    "repost_count": 0,
+    "is_quote": false,
+    "is_reply": false,
+    "attachment": {
+      "type": "media",
+      "value": [
+        {
+          "id": "sample-media-attachment-id-1",
+          "url_thumbnail": "https://files.gab.com/image/media-attachment-1.png",
+          "url_full": "https://files.gab.com/image/media-attachment-1.png",
+          "width": 1952,
+          "height": 1624
+        },
+        {
+          "id": "sample-media-attachment-id-2",
+          "url_thumbnail": "https://files.gab.com/image/media-attachment-2.png",
+          "url_full": "https://files.gab.com/image/media-attachment-2.png",
+          "width": 1952,
+          "height": 1624
+        }
+      ]
+    },
+    "language": "en",
+    "nsfw": false,
+    "is_premium": false,
+    "is_locked": false,
+    "premium_min_tier": 0,
+    "current_tier": 0,
+    "user": {
+      "id": 1,
+      "name": "Sample User",
+      "username": "sample-user",
+      "picture_url": "https://files.gab.com/file/files-gab/user/sample-user.jpeg",
+      "verified": true,
+      "is_donor": true,
+      "is_investor": true,
+      "is_pro": true,
+      "is_private": true,
+      "is_premium": true
+    }
+  }
+}

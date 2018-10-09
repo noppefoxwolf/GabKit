@@ -7,18 +7,14 @@
 //
 
 import UIKit
+import GabKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+  let gab = Gab(clientID: "", scopes: .read)
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    let callBackURL = URL(string: "gabkit://success")!
+    gab.authorize(with: callBackURL, presentingFrom: self)
+  }
 }
 
