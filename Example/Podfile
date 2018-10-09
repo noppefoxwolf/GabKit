@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GabKit_Example' do
+  pod 'GabKit', :path => '../'
+
+  target 'GabKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
