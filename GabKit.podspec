@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'GabKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of GabKit.'
+  s.summary          = 'Gab api client with swift.'
   s.description      = <<-DESC
 WIP - Gab api client with swift.
                        DESC
@@ -13,4 +13,5 @@ WIP - Gab api client with swift.
   s.social_media_url = 'https://twitter.com/noppefoxwolf'
   s.ios.deployment_target = '8.0'
   s.source_files = 'GabKit/Classes/**/*'
+  s.swift_version = '4.2'
 end
