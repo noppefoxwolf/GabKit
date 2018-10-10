@@ -8,12 +8,24 @@
 import Foundation
 
 extension Gab {
-  public func getMe(success: ((User) -> Void)? = nil, failure:((Error) -> Void)? = nil) {
-    
+  public func getMe(success: UserDetailSuccess? = nil, failure: Failure? = nil) {
+    get(url: "https://api.gab.com/v1.0/me/", params: [:]) { (userDetail: UserDetail?, response, error) in
+      if let userDetail = userDetail {
+        success?(userDetail)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
   
-  public func getUser(username: String) {
-    
+  public func getUser(username: String, success: UserDetailSuccess? = nil, failure: Failure? = nil) {
+    get(url: "https://api.gab.com/v1.0/users/\(username)", params: [:]) { (userDetail: UserDetail?, response, error) in
+      if let userDetail = userDetail {
+        success?(userDetail)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
   
   public func getFollowers(username: String) {

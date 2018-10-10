@@ -33,10 +33,6 @@ extension Gab {
                     completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
     var urlComponents = URLComponents(string: urlString)!
     urlComponents.queryItems = params.compactMap({ URLQueryItem(name: $0, value: $1) })
-    var headers: [String : String] = ["Content-Type": "application/json"]
-    if let accessToken = credential?.accessToken {
-      headers["Authorization"] = "Bearer \(accessToken)"
-    }
     var request = URLRequest(url: urlComponents.url!)
     request.httpMethod = "GET"
     request.allHTTPHeaderFields = headers
@@ -61,14 +57,26 @@ extension Gab {
                      params: [String : Any],
                      completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
     let url = URL(string: urlString)!
-    var headers: [String : String] = ["Content-Type": "application/json"]
-    if let accessToken = credential?.accessToken {
-      headers["Authorization"] = "Bearer \(accessToken)"
-    }
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
     request.allHTTPHeaderFields = headers
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
+  }
+  
+  private func _delete(url urlString: String, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
+    let url = URL(string: urlString)!
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    request.allHTTPHeaderFields = headers
+    URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
+  }
+  
+  private var headers: [String : String] {
+    var headers: [String : String] = ["Content-Type": "application/json"]
+    if let accessToken = credential?.accessToken {
+      headers["Authorization"] = "Bearer \(accessToken)"
+    }
+    return headers
   }
 }

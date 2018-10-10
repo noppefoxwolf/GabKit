@@ -22,6 +22,7 @@ extension Notification.Name {
 public typealias Success = (() -> Void)
 public typealias FeedSuccess = ((FeedResponse) -> Void)
 public typealias PostSuccess = ((PostResponse) -> Void)
+public typealias UserDetailSuccess = ((UserDetail) -> Void)
 public typealias Failure = ((Error) -> Void)
 
 public final class Gab {
@@ -30,9 +31,10 @@ public final class Gab {
   internal let scopes: [Scope]
   internal var credential: Credential? = nil
   
-  public init(clientID: String, clientSecret: String, scopes: Scope...) {
+  public init(clientID: String, clientSecret: String, credential: Credential? = nil, scopes: Scope...) {
     self.clientID = clientID
     self.clientSecret = clientSecret
+    self.credential = credential
     self.scopes = scopes
   }
 }

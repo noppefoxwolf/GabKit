@@ -7,7 +7,20 @@
 
 import Foundation
 
-public class User: Decodable {
+public protocol UserType {
+  var id: Int { get }
+  var name: String { get }
+  var username: String { get }
+  var pictureUrl: String { get }
+  var verified: Bool { get }
+  var isDonor: Bool { get }
+  var isInvestor: Bool { get }
+  var isPro: Bool { get }
+  var isPrivate: Bool { get }
+  var isPremium: Bool { get }
+}
+
+public class User: Decodable, UserType {
   public let id: Int
   public let name: String
   public let username: String
@@ -19,3 +32,4 @@ public class User: Decodable {
   public let isPrivate: Bool
   public let isPremium: Bool
 }
+

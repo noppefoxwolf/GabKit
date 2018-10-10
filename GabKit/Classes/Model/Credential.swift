@@ -7,9 +7,9 @@
 
 import Foundation
 
-internal class Credential: Decodable {
-  internal let tokenType: String
-  internal let expiresIn: Int
-  internal let accessToken: String
-  internal let refreshToken: String
+public class Credential: Decodable {
+  public let tokenType: String
+  public let expiresIn: Int
+  public let accessToken: String
+  public let refreshToken: String
 }
