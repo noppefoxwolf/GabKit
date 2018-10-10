@@ -20,6 +20,55 @@ it, simply add the following line to your Podfile:
 pod 'GabKit'
 ```
 
+## Usage
+
+### Authorize
+
+```swift
+let gab = Gab(clientID: Secret.clientID,
+                clientSecret: Secret.clientSecret,
+                scopes: .read, .notifications, .writePost)
+gab.authorize(withPresentingFrom: self)
+```
+
+Add your callback url as url scheme to info.plist.
+
+```
+<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gabkit</string>
+			</array>
+		</dict>
+	</array>
+```
+
+Handle URL in AppDelegate.
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    Gab.handleURL(url)
+    return true
+}
+```
+
+### Get Main feed
+
+```swift
+gab.getMainFeed(success: { (response) in
+})
+```
+
+### Create Post
+
+```swift
+gab.createPost(body: "hello gab.")
+```
+
 ## Author
 
 noppefoxwolf, noppelabs@gmail.com
