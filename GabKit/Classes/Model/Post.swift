@@ -29,7 +29,7 @@ public class Post: Decodable {
   public let isQuote: Bool
   public let isReply: Bool
   public let attachment: Attachment
-  public let language: String
+  public let language: String?
   public let nsfw: Bool
   public let isPremium: Bool
   public let isLocked: Bool

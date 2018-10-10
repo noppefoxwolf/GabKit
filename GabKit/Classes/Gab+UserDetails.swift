@@ -9,7 +9,7 @@ import Foundation
 
 extension Gab {
   public func getMe(success: ((User) -> Void)? = nil, failure:((Error) -> Void)? = nil) {
-    get(success: success, failure: failure)
+    
   }
   
   public func getUser(username: String) {

@@ -19,12 +19,20 @@ extension Notification.Name {
   static let gabCallback = Notification.Name(rawValue: "GabKit.CallbackNotificationName")
 }
 
+public typealias Success = (() -> Void)
+public typealias FeedSuccess = ((FeedResponse) -> Void)
+public typealias PostSuccess = ((PostResponse) -> Void)
+public typealias Failure = ((Error) -> Void)
+
 public final class Gab {
-  private let clientID: String
-  private let scopes: [Scope]
+  internal let clientID: String
+  internal let clientSecret: String
+  internal let scopes: [Scope]
+  internal var credential: Credential? = nil
   
-  public init(clientID: String, scopes: Scope...) {
+  public init(clientID: String, clientSecret: String, scopes: Scope...) {
     self.clientID = clientID
+    self.clientSecret = clientSecret
     self.scopes = scopes
   }
 }

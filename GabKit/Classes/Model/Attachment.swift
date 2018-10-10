@@ -8,6 +8,7 @@
 import Foundation
 
 public class Attachment: Decodable {
-  public let type: String
-  public let value: [Media]
+  public let type: String?
+  //STI..?
+  //public let value: Media?
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		37DBF2A5216D171C009A2249 /* CreatePostResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 37DBF2A4216D171C009A2249 /* CreatePostResponse.json */; };
+		37DBF2B4216E6E09009A2249 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBF2B3216E6E09009A2249 /* ComposeViewController.swift */; };
+		37DBF2B6216E6E19009A2249 /* ComposeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DBF2B5216E6E19009A2249 /* ComposeViewController.storyboard */; };
+		37DBF2B8216E74B3009A2249 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DBF2B7216E74B3009A2249 /* Secret.swift */; };
 		59CB404CE296F50DE96200CC /* Pods_GabKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B34D97618228D065F94175 /* Pods_GabKit_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -32,6 +35,9 @@
 		0E74D783CC66AB0EAEC0495A /* Pods-GabKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GabKit_Example.release.xcconfig"; path = "Target Support Files/Pods-GabKit_Example/Pods-GabKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		10CC06A315529244E55049D5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		37DBF2A4216D171C009A2249 /* CreatePostResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreatePostResponse.json; sourceTree = "<group>"; };
+		37DBF2B3216E6E09009A2249 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		37DBF2B5216E6E19009A2249 /* ComposeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ComposeViewController.storyboard; sourceTree = "<group>"; };
+		37DBF2B7216E74B3009A2249 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GabKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GabKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37DBF2B2216E6DF8009A2249 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				37DBF2B3216E6E09009A2249 /* ComposeViewController.swift */,
+				37DBF2B5216E6E19009A2249 /* ComposeViewController.storyboard */,
+			);
+			name = Compose;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -95,12 +110,14 @@
 		607FACD21AFB9204008FA782 /* Example for GabKit */ = {
 			isa = PBXGroup;
 			children = (
+				37DBF2B2216E6DF8009A2249 /* Compose */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				37DBF2B7216E74B3009A2249 /* Secret.swift */,
 			);
 			name = "Example for GabKit";
 			path = GabKit;
@@ -248,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DBF2B6216E6E19009A2249 /* ComposeViewController.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -338,6 +356,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DBF2B4216E6E09009A2249 /* ComposeViewController.swift in Sources */,
+				37DBF2B8216E74B3009A2249 /* Secret.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
