@@ -27,3 +27,18 @@ noppefoxwolf, noppelabs@gmail.com
 ## License
 
 GabKit is available under the MIT license. See the LICENSE file for more info.
+
+## TODO
+
+- [x] authorize
+- [x] create post
+- [ ] create post (advance)
+- [ ] engaging with other users
+- [x] get main feed
+- [ ] all feeds functions
+- [ ] group
+- [ ] notificaitons
+- [ ] popular
+- [ ] reacting to posts
+- [ ] request
+- [ ] user details
