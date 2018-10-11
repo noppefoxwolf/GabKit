@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'GabKit'
-  s.version          = '1.0.0'
+  s.version          = '0.5.0'
   s.summary          = 'Gab api client with swift.'
   s.description      = <<-DESC
 WIP - Gab api client with swift.
