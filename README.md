@@ -81,13 +81,16 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
 
 - [x] authorize
 - [x] create post
-- [ ] create post (advance)
-- [ ] engaging with other users
-- [x] get main feed
-- [ ] all feeds functions
-- [ ] group
-- [ ] notificaitons
-- [ ] popular
-- [ ] reacting to posts
-- [ ] request
-- [ ] user details
+- [x] engaging with other users
+- [x] feeds
+- [x] group
+- [x] notificaitons
+- [x] popular
+- [x] reacting to posts
+- [x] request
+- [x] user details
+- [ ] support ios
+- [ ] support osx
+- [ ] support carthage
+
+
