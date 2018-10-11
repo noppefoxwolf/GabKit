@@ -38,7 +38,7 @@ extension Gab {
       if let data = data {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.keyDecodingStrategy = .convertFromSnakeCaseOrKebabCase
         do {
           object = try decoder.decode(T.self, from: data)
         } catch (let e) {
@@ -68,7 +68,7 @@ extension Gab {
       var object: T? = nil
       if let data = data {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.keyDecodingStrategy = .convertFromSnakeCaseOrKebabCase
         object = try? decoder.decode(T.self, from: data)
       }
       completionHandler(object, response, error)
@@ -93,7 +93,7 @@ extension Gab {
       var object: T? = nil
       if let data = data {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.keyDecodingStrategy = .convertFromSnakeCaseOrKebabCase
         object = try? decoder.decode(T.self, from: data)
       }
       completionHandler(object, response, error)
@@ -116,7 +116,7 @@ extension Gab {
       var object: T? = nil
       if let data = data {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.keyDecodingStrategy = .convertFromSnakeCaseOrKebabCase
         object = try? decoder.decode(T.self, from: data)
       }
       completionHandler(object, response, error)
@@ -138,7 +138,7 @@ extension Gab {
   static let boundary = "----WebKitFormBoundaryZLdHZy8HNaBmUX0d"
   private func httpBody(_ fileAsData: Data, fileName: String = "image.png") -> Data {
     var data = "--\(Gab.boundary)\r\n".data(using: .utf8)!
-    // サーバ側が想定しているinput(type=file)タグのname属性値とファイル名をContent-Dispositionヘッダで設定
+    
     data += "Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!
     data += "Content-Type: image/png\r\n".data(using: .utf8)!
     data += "\r\n".data(using: .utf8)!
@@ -149,3 +149,4 @@ extension Gab {
     return data
   }
 }
+

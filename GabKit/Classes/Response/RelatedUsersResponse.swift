@@ -10,5 +10,5 @@ import Foundation
 public class RelatedUsersResponse: Decodable {
   public let data: [RelatedUserDetail]
   public let count: Int
-  //public let no-more: Bool
+  public let noMore: Bool
 }

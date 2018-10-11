@@ -9,5 +9,5 @@ import Foundation
 
 public class FeedResponse: Decodable {
   public let data: [PostResponse]
-  //public let no-more: Bool
+  public let noMore: Bool
 }

@@ -9,5 +9,5 @@ import Foundation
 
 public class UsersResponse: Decodable {
   public let data: [User]
-  //public let no-more: Bool
+  public let noMore: Bool
 }

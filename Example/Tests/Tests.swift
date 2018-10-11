@@ -38,3 +38,13 @@ class JSONMappingTests: XCTestCase {
     }
   }
 }
+
+class StringExetnsionTests: XCTestCase {
+  func testSnakeToCamelCase() {
+    XCTAssertEqual("user_profile".camelCase, "userProfile")
+  }
+  
+  func testKebabToCamelCase() {
+    XCTAssertEqual("user-profile".camelCase, "userProfile")
+  }
+}
