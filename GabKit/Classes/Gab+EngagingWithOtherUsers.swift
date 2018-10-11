@@ -8,13 +8,23 @@
 import Foundation
 
 extension Gab {
-  public func follow(userID: Int, success: FeedSuccess? = nil, failure: Failure? = nil) {
-    post(path: "users/\(userID)/follow", params: [:]) { (user: User?, response, error) in
-      
+  public func follow(userID: Int, success: ActionSuccess? = nil, failure: Failure? = nil) {
+    post(path: "users/\(userID)/follow") { (actionResponse: ActionResponse?, response, error) in
+      if let actionResponse = actionResponse {
+        success?(actionResponse)
+      } else if let error = error {
+        failure?(error)
+      }
     }
   }
   
-  func unFollow(userID: String) {
-    
+  public func unFollow(userID: Int, success: ActionSuccess? = nil, failure: Failure? = nil) {
+    delete(path: "users/\(userID)/follow") { (actionResponse: ActionResponse?, response, error) in
+      if let actionResponse = actionResponse {
+        success?(actionResponse)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
 }

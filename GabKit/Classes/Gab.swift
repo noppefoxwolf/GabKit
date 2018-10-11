@@ -27,9 +27,15 @@ extension Foundation.Notification.Name {
 public typealias Success = (() -> Void)
 public typealias FeedSuccess = ((FeedResponse) -> Void)
 public typealias PostSuccess = ((PostResponse) -> Void)
+public typealias PostDetailSuccess = ((PostDetail) -> Void)
 public typealias UserDetailSuccess = ((UserDetail) -> Void)
 public typealias RelatedUsersSuccess = ((RelatedUsersResponse) -> Void)
+public typealias UsersSuccess = ((UsersResponse) -> Void)
+public typealias GroupDetailSuccess = ((GroupDetail) -> Void)
+public typealias GroupsSuccess = ((GroupsResponse) -> Void)
 public typealias NotificationsSuccess = ((NotificationsResponse) -> Void)
+public typealias ActionSuccess = ((ActionResponse) -> Void)
+public typealias ModerationLogsSuccess = ((ModerationLogsResponse) -> Void)
 public typealias Failure = ((Error) -> Void)
 
 public final class Gab {

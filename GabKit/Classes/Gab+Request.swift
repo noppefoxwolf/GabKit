@@ -10,7 +10,7 @@ import Foundation
 extension Gab {
   internal func get<T: Decodable>(path: String,
                                   baseURL: GabURL = .api,
-                                  params: [String : String?],
+                                  params: [String : String?] = [:],
                                   completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
     _get(url: baseURL.rawValue + path, params: params, completionHandler: { (data, response, error) in
       var error: Error? = error
@@ -42,7 +42,7 @@ extension Gab {
   
   internal func post<T: Decodable>(path: String,
                                    baseURL: GabURL = .api,
-                                   params: [String : Any],
+                                   params: [String : Any] = [:],
                                    completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
     _post(url: baseURL.rawValue + path, params: params) { (data, response, error) in
       var object: T? = nil
@@ -64,6 +64,20 @@ extension Gab {
     request.httpBody = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
     request.allHTTPHeaderFields = headers
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
+  }
+  
+  internal func delete<T: Decodable>(path: String,
+                                     baseURL: GabURL = .api,
+                                     completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
+    _delete(url: baseURL.rawValue + path) { (data, response, error) in
+      var object: T? = nil
+      if let data = data {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        object = try? decoder.decode(T.self, from: data)
+      }
+      completionHandler(object, response, error)
+    }
   }
   
   private func _delete(url urlString: String, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
