@@ -8,6 +8,26 @@
 import Foundation
 
 extension Gab {
+  enum ContentType {
+    case json
+    case multipart
+    
+    var value: String {
+      switch self {
+      case .json: return "application/json"
+      case .multipart: return "multipart/form-data; boundary=\(Gab.boundary)"
+      }
+    }
+  }
+  
+  private func headers(contentType: ContentType = .json) -> [String : String] {
+    var headers: [String : String] = ["Content-Type": contentType.value]
+    if let accessToken = credential?.accessToken {
+      headers["Authorization"] = "Bearer \(accessToken)"
+    }
+    return headers
+  }
+  
   internal func get<T: Decodable>(path: String,
                                   baseURL: GabURL = .api,
                                   params: [String : String?] = [:],
@@ -36,7 +56,7 @@ extension Gab {
     urlComponents.queryItems = params.compactMap({ URLQueryItem(name: $0, value: $1) })
     var request = URLRequest(url: urlComponents.url!)
     request.httpMethod = "GET"
-    request.allHTTPHeaderFields = headers
+    request.allHTTPHeaderFields = headers()
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
   }
   
@@ -62,7 +82,7 @@ extension Gab {
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-    request.allHTTPHeaderFields = headers
+    request.allHTTPHeaderFields = headers()
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
   }
   
@@ -84,15 +104,48 @@ extension Gab {
     let url = URL(string: urlString)!
     var request = URLRequest(url: url)
     request.httpMethod = "DELETE"
-    request.allHTTPHeaderFields = headers
+    request.allHTTPHeaderFields = headers()
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
   }
   
-  private var headers: [String : String] {
-    var headers: [String : String] = ["Content-Type": "application/json"]
-    if let accessToken = credential?.accessToken {
-      headers["Authorization"] = "Bearer \(accessToken)"
+  internal func upload<T: Decodable>(path: String,
+                                     file fileData: Data,
+                                     baseURL: GabURL = .api,
+                                     completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
+    _upload(url: baseURL.rawValue + path, file: fileData) { (data, response, error) in
+      var object: T? = nil
+      if let data = data {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        object = try? decoder.decode(T.self, from: data)
+      }
+      completionHandler(object, response, error)
     }
-    return headers
+  }
+  
+  private func _upload(url urlString: String,
+                       file fileData: Data,
+                     completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
+    let url = URL(string: urlString)!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    let config = URLSessionConfiguration.default
+    config.httpAdditionalHeaders = headers(contentType: .multipart)
+    let session = URLSession(configuration: config)
+    session.uploadTask(with: request, from: httpBody(fileData), completionHandler: completionHandler).resume()
+  }
+  
+  static let boundary = "----WebKitFormBoundaryZLdHZy8HNaBmUX0d"
+  private func httpBody(_ fileAsData: Data, fileName: String = "image.png") -> Data {
+    var data = "--\(Gab.boundary)\r\n".data(using: .utf8)!
+    // サーバ側が想定しているinput(type=file)タグのname属性値とファイル名をContent-Dispositionヘッダで設定
+    data += "Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!
+    data += "Content-Type: image/png\r\n".data(using: .utf8)!
+    data += "\r\n".data(using: .utf8)!
+    data += fileAsData
+    data += "\r\n".data(using: .utf8)!
+    data += "--\(Gab.boundary)--\r\n".data(using: .utf8)!
+    
+    return data
   }
 }

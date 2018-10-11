@@ -7,6 +7,14 @@
 
 import Foundation
 
+#if os(macOS)
+import AppKit
+public typealias Image = NSImage
+#else
+import UIKit
+public typealias Image = UIImage
+#endif
+
 public enum Scope: String {
   case read
   case engageUser = "engage-user"
@@ -36,6 +44,7 @@ public typealias GroupsSuccess = ((GroupsResponse) -> Void)
 public typealias NotificationsSuccess = ((NotificationsResponse) -> Void)
 public typealias ActionSuccess = ((ActionResponse) -> Void)
 public typealias ModerationLogsSuccess = ((ModerationLogsResponse) -> Void)
+public typealias UploadSuccess = ((UploadFileResponse) -> Void)
 public typealias Failure = ((Error) -> Void)
 
 public final class Gab {

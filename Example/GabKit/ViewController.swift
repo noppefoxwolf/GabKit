@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
   private lazy var delegator: TableViewDelegator = .init(with: tableView)
   let gab = Gab(clientID: Secret.clientID,
                 clientSecret: Secret.clientSecret,
-                scopes: .read, .notifications, .writePost)
+                scopes: .read, .notifications, .writePost, .engageUser, .engagePost)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,7 +81,7 @@ extension ViewController: ComposeViewControllerDelegate {
   
   func composeViewController(_ viewController: ComposeViewController, didSelectSendButton: UIBarButtonItem) {
     viewController.dismiss(animated: true, completion: nil)
-    gab.createPost(viewController.body, success: { (response) in
+    gab.publish(viewController.body, success: { (response) in
       print(response)
     }) { (error) in
       print(error)
