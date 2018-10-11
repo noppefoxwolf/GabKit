@@ -33,7 +33,7 @@ extension Gab {
       params["poll"] = 0
     }
     
-    post(url: "https://api.gab.com/v1.0/posts", params: params) { (postResponse: PostResponse?, response, error) in
+    post(path: "posts", params: params) { (postResponse: PostResponse?, response, error) in
       if let postResponse = postResponse {
         success?(postResponse)
       } else if let error = error {

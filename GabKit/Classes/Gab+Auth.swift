@@ -31,7 +31,7 @@ extension Gab {
   }
   
   public static func handleURL(_ url: URL) {
-    let notification = Notification(name: .gabCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
+    let notification = Foundation.Notification(name: .gabCallback, object: nil, userInfo: [CallbackNotification.optionsURLKey: url])
     NotificationCenter.default.post(notification)
   }
   
@@ -42,7 +42,7 @@ extension Gab {
       "client_id" : clientID,
       "client_secret" : clientSecret
     ]
-    post(url: "https://api.gab.com/oauth/token", params: params) { [weak self] (credential: Credential?, _, error) in
+    post(path: "token", baseURL: .outh, params: params) { [weak self] (credential: Credential?, _, error) in
       self?.credential = credential
       if let error = error {
         failure?(error)
@@ -61,7 +61,7 @@ extension Gab {
       "client_secret" : clientSecret,
       "scope" : scopeValue
     ]
-    post(url: "https://api.gab.com/oauth/token", params: params) { (credential: Credential?, _, _) in
+    post(path: "token", baseURL: .outh, params: params) { (credential: Credential?, _, _) in
       
     }
   }

@@ -15,18 +15,31 @@ extension Gab {
       formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
       params["before"] = formatter.string(from: before)
     }
-    get(url: "https://api.gab.com/v1.0/feed", params: params) { (feedResponse: FeedResponse?, response, error) in
+    get(path: "feed", params: params) { (feedResponse: FeedResponse?, response, error) in
       if let feedResponse = feedResponse {
         success?(feedResponse)
       } else if let error = error {
         failure?(error)
-      } else {
-        preconditionFailure()
       }
     }
   }
   
-  public func getUserFeed() {
-    
+  public func getUserFeed(username: String,
+                          before: Date? = nil,
+                          success: FeedSuccess? = nil,
+                          failure: Failure? = nil) {
+    var params: [String : String?] = [:]
+    if let before = before {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+      params["before"] = formatter.string(from: before)
+    }
+    get(path: "users/\(username)/feed", params: params) { (feedResponse: FeedResponse?, response, error) in
+      if let feedResponse = feedResponse {
+        success?(feedResponse)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
 }

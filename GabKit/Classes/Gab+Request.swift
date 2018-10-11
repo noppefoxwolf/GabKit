@@ -8,10 +8,11 @@
 import Foundation
 
 extension Gab {
-  internal func get<T: Decodable>(url urlString: String,
-                                   params: [String : String?],
-                                   completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
-    _get(url: urlString, params: params, completionHandler: { (data, response, error) in
+  internal func get<T: Decodable>(path: String,
+                                  baseURL: GabURL = .api,
+                                  params: [String : String?],
+                                  completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
+    _get(url: baseURL.rawValue + path, params: params, completionHandler: { (data, response, error) in
       var error: Error? = error
       var object: T? = nil
       if let data = data {
@@ -39,10 +40,11 @@ extension Gab {
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
   }
   
-  internal func post<T: Decodable>(url urlString: String,
+  internal func post<T: Decodable>(path: String,
+                                   baseURL: GabURL = .api,
                                    params: [String : Any],
                                    completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
-    _post(url: urlString, params: params) { (data, response, error) in
+    _post(url: baseURL.rawValue + path, params: params) { (data, response, error) in
       var object: T? = nil
       if let data = data {
         let decoder = JSONDecoder()

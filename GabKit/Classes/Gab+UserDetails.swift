@@ -9,7 +9,7 @@ import Foundation
 
 extension Gab {
   public func getMe(success: UserDetailSuccess? = nil, failure: Failure? = nil) {
-    get(url: "https://api.gab.com/v1.0/me/", params: [:]) { (userDetail: UserDetail?, response, error) in
+    get(path: "me", params: [:]) { (userDetail: UserDetail?, response, error) in
       if let userDetail = userDetail {
         success?(userDetail)
       } else if let error = error {
@@ -18,8 +18,10 @@ extension Gab {
     }
   }
   
-  public func getUser(username: String, success: UserDetailSuccess? = nil, failure: Failure? = nil) {
-    get(url: "https://api.gab.com/v1.0/users/\(username)", params: [:]) { (userDetail: UserDetail?, response, error) in
+  public func getUser(username: String,
+                      success: UserDetailSuccess? = nil,
+                      failure: Failure? = nil) {
+    get(path: "users/\(username)", params: [:]) { (userDetail: UserDetail?, response, error) in
       if let userDetail = userDetail {
         success?(userDetail)
       } else if let error = error {
@@ -28,11 +30,37 @@ extension Gab {
     }
   }
   
-  public func getFollowers(username: String) {
-    
+  public func getFollowers(username: String,
+                           before: Int? = nil,
+                           success: RelatedUsersSuccess? = nil,
+                           failure: Failure? = nil) {
+    var params: [String : String?] = [:]
+    if let before = before {
+      params["before"] = "\(before)"
+    }
+    get(path: "users/\(username)/followers", params: params) { (users: RelatedUsersResponse?, response, error) in
+      if let users = users {
+        success?(users)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
   
-  public func getFollowedUsers(username: String) {
-    
+  public func getFollowedUsers(username: String,
+                               before: Int? = nil,
+                               success: RelatedUsersSuccess? = nil,
+                               failure: Failure? = nil) {
+    var params: [String : String?] = [:]
+    if let before = before {
+      params["before"] = "\(before)"
+    }
+    get(path: "users/\(username)/following", params: params) { (users: RelatedUsersResponse?, response, error) in
+      if let users = users {
+        success?(users)
+      } else if let error = error {
+        failure?(error)
+      }
+    }
   }
 }

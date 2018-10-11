@@ -8,8 +8,8 @@
 import Foundation
 
 extension Gab {
-  public func follow(userID: Int) {
-    post(url: "https://api.gab.com/v1.0/users/\(userID)/follow", params: [:]) { (user: User?, response, error) in
+  public func follow(userID: Int, success: FeedSuccess? = nil, failure: Failure? = nil) {
+    post(path: "users/\(userID)/follow", params: [:]) { (user: User?, response, error) in
       
     }
   }

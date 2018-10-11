@@ -15,14 +15,21 @@ public enum Scope: String {
   case notifications
 }
 
-extension Notification.Name {
-  static let gabCallback = Notification.Name(rawValue: "GabKit.CallbackNotificationName")
+public enum GabURL: String {
+  case api = "https://api.gab.com/v1.0/"
+  case outh = "https://api.gab.com/oauth/"
+}
+
+extension Foundation.Notification.Name {
+  static let gabCallback = Foundation.Notification.Name(rawValue: "GabKit.CallbackNotificationName")
 }
 
 public typealias Success = (() -> Void)
 public typealias FeedSuccess = ((FeedResponse) -> Void)
 public typealias PostSuccess = ((PostResponse) -> Void)
 public typealias UserDetailSuccess = ((UserDetail) -> Void)
+public typealias RelatedUsersSuccess = ((RelatedUsersResponse) -> Void)
+public typealias NotificationsSuccess = ((NotificationsResponse) -> Void)
 public typealias Failure = ((Error) -> Void)
 
 public final class Gab {
