@@ -81,6 +81,7 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
 
 - [x] authorize
 - [x] create post
+- [ ] convenience upload image and publish post
 - [x] engaging with other users
 - [x] feeds
 - [x] group
@@ -89,8 +90,11 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
 - [x] reacting to posts
 - [x] request
 - [x] user details
-- [ ] support ios
+- [x] support ios
 - [ ] support osx
+- [ ] support linux
+- [x] support cocoapods
 - [ ] support carthage
+- [ ] support swift package manager
 
 
