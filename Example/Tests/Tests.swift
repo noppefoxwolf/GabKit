@@ -1,5 +1,5 @@
 import XCTest
-import GabKit
+@testable import GabKit
 
 class JSONMappingTests: XCTestCase {
   func testPostResponse() {
