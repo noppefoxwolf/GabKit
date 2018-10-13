@@ -15,7 +15,7 @@ import UIKit
 public typealias Image = UIImage
 #endif
 
-public enum Scope: String {
+public enum Scope: String, Codable {
   case read
   case engageUser = "engage-user"
   case engagePost = "engage-post"
@@ -54,7 +54,7 @@ public final class Gab {
   internal let scopes: [Scope]
   internal var credential: Credential? = nil
   
-  public init(clientID: String, clientSecret: String, credential: Credential? = nil, scopes: Scope...) {
+  public init(clientID: String, clientSecret: String, credential: Credential? = nil, scopes: [Scope]) {
     self.clientID = clientID
     self.clientSecret = clientSecret
     self.credential = credential

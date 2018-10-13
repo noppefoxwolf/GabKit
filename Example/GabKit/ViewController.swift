@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
   private lazy var delegator: TableViewDelegator = .init(with: tableView)
   let gab = Gab(clientID: Secret.clientID,
                 clientSecret: Secret.clientSecret,
-                scopes: .read, .notifications, .writePost, .engageUser, .engagePost)
+                scopes: [.read, .notifications, .writePost, .engageUser, .engagePost])
   
   override func viewDidLoad() {
     super.viewDidLoad()
