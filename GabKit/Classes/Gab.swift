@@ -15,7 +15,7 @@ import UIKit
 public typealias Image = UIImage
 #endif
 
-public enum Scope: String, CaseIterable {
+public enum Scope: String {
   case read
   case engageUser = "engage-user"
   case engagePost = "engage-post"
