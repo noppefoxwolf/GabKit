@@ -32,19 +32,20 @@ extension Foundation.Notification.Name {
   static let gabCallback = Foundation.Notification.Name(rawValue: "GabKit.CallbackNotificationName")
 }
 
-public typealias Success = (() -> Void)
-public typealias FeedSuccess = ((FeedResponse) -> Void)
-public typealias PostSuccess = ((PostResponse) -> Void)
-public typealias PostDetailSuccess = ((PostDetail) -> Void)
-public typealias UserDetailSuccess = ((UserDetail) -> Void)
-public typealias RelatedUsersSuccess = ((RelatedUsersResponse) -> Void)
-public typealias UsersSuccess = ((UsersResponse) -> Void)
-public typealias GroupDetailSuccess = ((GroupDetail) -> Void)
-public typealias GroupsSuccess = ((GroupsResponse) -> Void)
-public typealias NotificationsSuccess = ((NotificationsResponse) -> Void)
-public typealias ActionSuccess = ((ActionResponse) -> Void)
-public typealias ModerationLogsSuccess = ((ModerationLogsResponse) -> Void)
-public typealias UploadSuccess = ((UploadFileResponse) -> Void)
+public typealias Success<T> = ((T) -> Void)
+public typealias AuthSuccess = Success<Credential>
+public typealias FeedSuccess = Success<FeedResponse>
+public typealias PostSuccess = Success<PostResponse>
+public typealias PostDetailSuccess = Success<PostDetail>
+public typealias UserDetailSuccess = Success<UserDetail>
+public typealias RelatedUsersSuccess = Success<RelatedUsersResponse>
+public typealias UsersSuccess = Success<UsersResponse>
+public typealias GroupDetailSuccess = Success<GroupDetail>
+public typealias GroupsSuccess = Success<GroupsResponse>
+public typealias NotificationsSuccess = Success<NotificationsResponse>
+public typealias ActionSuccess = Success<ActionResponse>
+public typealias ModerationLogsSuccess = Success<ModerationLogsResponse>
+public typealias UploadSuccess = Success<UploadFileResponse>
 public typealias Failure = ((Error) -> Void)
 
 public final class Gab {

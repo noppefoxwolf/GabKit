@@ -32,7 +32,7 @@ final class ViewController: UIViewController {
   }
   
   @objc func tappedAuthorizeButton(_ sender: UIBarButtonItem) {
-    gab.authorize(withPresentingFrom: self, success: { [weak self] in
+    gab.authorize(withPresentingFrom: self, success: { [weak self] (_) in
       self?.fetchMainFeed()
     }) { [weak self] (error) in
       DispatchQueue.main.async {
