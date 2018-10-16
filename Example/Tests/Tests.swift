@@ -29,7 +29,7 @@ class JSONMappingTests: XCTestCase {
       XCTAssertEqual(response.post.createdAt.timeIntervalSince1970, 1538607473)
       XCTAssertNil(response.post.revisedAt)
       XCTAssertEqual(response.post.body, "Sample post with multiple media attachments")
-      XCTAssertEqual(response.post.attachment.type, "media")
+      XCTAssertEqual(response.post.attachment.type, AttachmentType.media)
       //複数と単数の場合があるかも
       //XCTAssertEqual(response.post.attachment.value!.count, 2)
     } catch {
@@ -46,5 +46,11 @@ class StringExetnsionTests: XCTestCase {
   
   func testKebabToCamelCase() {
     XCTAssertEqual("user-profile".camelCase, "userProfile")
+  }
+}
+
+class AttachmentTypeTests: XCTestCase {
+  func testIsEqual() {
+    XCTAssertEqual(AttachmentType.media, AttachmentType.media)
   }
 }

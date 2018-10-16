@@ -7,10 +7,13 @@
 
 import Foundation
 
-public class Media: Decodable {
-  public let id: String
-  public let urlThumbnail: String
-  public let urlFull: String
-  public let width: Int
-  public let height: Int
+extension Attachment {
+  public class Media: Decodable {
+    public let id: String
+    public let urlThumbnail: String
+    public let urlFull: String
+    public let width: Int
+    public let height: Int
+  }
 }
+
