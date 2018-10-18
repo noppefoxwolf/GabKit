@@ -11,6 +11,7 @@ public enum NotificationType: String, Decodable {
   case repost
   case like
   case follow
+  case mention
 }
 
 public class Notification: Decodable {
