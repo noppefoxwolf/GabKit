@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
   private lazy var delegator: TableViewDelegator = .init(with: tableView)
   let gab = Gab(clientID: Secret.clientID,
                 clientSecret: Secret.clientSecret,
-                scopes: .read, .notifications, .writePost, .engageUser, .engagePost)
+                scopes: [.read, .notifications, .writePost, .engageUser, .engagePost])
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,7 +32,7 @@ final class ViewController: UIViewController {
   }
   
   @objc func tappedAuthorizeButton(_ sender: UIBarButtonItem) {
-    gab.authorize(withPresentingFrom: self, success: { [weak self] in
+    gab.authorize(withPresentingFrom: self, success: { [weak self] (_) in
       self?.fetchMainFeed()
     }) { [weak self] (error) in
       DispatchQueue.main.async {

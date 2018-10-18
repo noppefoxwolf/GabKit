@@ -9,7 +9,7 @@ import SafariServices
 
 extension Gab {
   public func authorize(withPresentingFrom presenting: UIViewController,
-                        success: Success? = nil, failure: Failure? = nil) {
+                        success: AuthSuccess? = nil, failure: Failure? = nil) {
     NotificationCenter.default.addObserver(forName: .gabCallback, object: nil, queue: .main) { (notification) in
       NotificationCenter.default.removeObserver(self)
       presenting.presentedViewController?.dismiss(animated: true, completion: nil)
@@ -35,7 +35,7 @@ extension Gab {
     NotificationCenter.default.post(notification)
   }
   
-  internal func fetchToken(code: String, success: Success? = nil, failure: Failure? = nil) {
+  internal func fetchToken(code: String, success: AuthSuccess? = nil, failure: Failure? = nil) {
     let params: [String : Any] = [
       "grant_type" : "authorization_code",
       "code" : code,
@@ -43,11 +43,11 @@ extension Gab {
       "client_secret" : clientSecret
     ]
     post(path: "token", baseURL: .outh, params: params) { [weak self] (credential: Credential?, _, error) in
-      self?.credential = credential
-      if let error = error {
+      if let credential = credential {
+        self?.credential = credential
+        success?(credential)
+      } else if let error = error {
         failure?(error)
-      } else {
-        success?()
       }
     }
   }

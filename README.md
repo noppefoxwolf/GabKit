@@ -97,4 +97,6 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
 - [ ] support carthage
 - [ ] support swift package manager
 
-
+- supported attachment type
+  - [x] media
+  - [x] url

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Credential: Decodable {
+public class Credential: Codable {
   public let tokenType: String
   public let expiresIn: Int
   public let accessToken: String
