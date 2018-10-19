@@ -1,5 +1,5 @@
 PODS:
-  - GabKit (0.8.0)
+  - GabKit (0.10.0)
 
 DEPENDENCIES:
   - GabKit (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GabKit: 2e43f5d85ac70259f898b36a7abb607910e0091e
+  GabKit: c34771b502fb848d4c251bfa933194e7f1a4aea7
 
 PODFILE CHECKSUM: 2f9abec8baddfdb40e5d989e0c01261bfd6c298c
 

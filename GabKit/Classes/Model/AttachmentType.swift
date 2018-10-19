@@ -10,4 +10,5 @@ import Foundation
 public enum AttachmentType: String, Decodable {
   case media
   case url
+  case giphy
 }
