@@ -53,4 +53,64 @@ class AttachmentTypeTests: XCTestCase {
   func testIsEqual() {
     XCTAssertEqual(AttachmentType.media, AttachmentType.media)
   }
+  
+  struct Sample: Decodable {
+    let type: AttachmentType?
+  }
+  
+  func testDecodeMedia() {
+    let json = """
+{"type" : "media"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.media)
+  }
+  
+  func testDecodeURL() {
+    let json = """
+{"type" : "url"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.url)
+  }
+  
+  func testDecodeGiphy() {
+    let json = """
+{"type" : "giphy"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.giphy)
+  }
+  
+  func testDecodeYoutube() {
+    let json = """
+{"type" : "youtube"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.youtube)
+  }
+  
+  func testDecodeUnknown() {
+    let json = """
+{"type" : "twitter"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.unknown("twitter"))
+  }
+  
+  func testDecodeBlank() {
+    let json = """
+{"type" : ""}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, AttachmentType.unknown(""))
+  }
+  
+  func testDecodeNil() {
+    let json = """
+{}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertNil(sample.type)
+  }
 }

@@ -7,13 +7,6 @@
 
 import Foundation
 
-public enum NotificationType: String, Decodable {
-  case repost
-  case like
-  case follow
-  case mention
-}
-
 public class Notification: Decodable {
   public let id: String
   public let createdAt: Date
