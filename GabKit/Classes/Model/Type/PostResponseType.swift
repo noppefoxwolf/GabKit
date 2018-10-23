@@ -9,6 +9,7 @@ import Foundation
 
 public enum PostResponseType: Decodable, Equatable {
   case post
+  case repost
   case unknown(String)
   
   public init(from decoder: Decoder) throws {
@@ -17,6 +18,8 @@ public enum PostResponseType: Decodable, Equatable {
     switch key {
     case "post":
       self = .post
+    case "repost":
+      self = .repost
     default:
       self = .unknown(key)
     }

@@ -36,4 +36,6 @@ public class Post: Decodable {
   public let premiumMinTier: Int
   public let currentTier: Int
   public let user: User
+  public let parent: Post?
+  public let conversationParent: Post?
 }
