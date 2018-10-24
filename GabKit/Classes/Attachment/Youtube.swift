@@ -14,7 +14,7 @@ extension Attachment {
       return "https://www.youtube.com/watch?v=\(id)"
     }
     public var thumbnailURL: String {
-      return "http://i.ytimg.com/vi/\(id)/mqdefault.jpg"
+      return "https://i.ytimg.com/vi/\(id)/mqdefault.jpg"
     }
     
     required public init(from decoder: Decoder) throws {
