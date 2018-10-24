@@ -29,7 +29,7 @@ class JSONMappingTests: XCTestCase {
       XCTAssertEqual(response.post.createdAt.timeIntervalSince1970, 1538607473)
       XCTAssertNil(response.post.revisedAt)
       XCTAssertEqual(response.post.body, "Sample post with multiple media attachments")
-      if case .media(_) = response.post.attachment {
+      if case .medias(_) = response.post.attachment {
       } else {
         XCTFail("attachment is not media")
       }
@@ -158,8 +158,8 @@ class AttachmentTypeTests: XCTestCase {
 """
     do {
       let sample = try JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
-      if case .giphy(let url) = sample.attachment! {
-        XCTAssertEqual(url, "hoge")
+      if case .giphy(let giphy) = sample.attachment! {
+        XCTAssertEqual(giphy.url, "hoge")
       } else {
         XCTFail("attachment is not giphy")
       }
@@ -179,8 +179,8 @@ class AttachmentTypeTests: XCTestCase {
 """
     do {
       let sample = try JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
-      if case .youtube(let url) = sample.attachment! {
-        XCTAssertEqual(url, "fuga")
+      if case .youtube(let youtube) = sample.attachment! {
+        XCTAssertEqual(youtube.id, "fuga")
       } else {
         XCTFail("attachment is not youtube")
       }

@@ -11,8 +11,8 @@ public enum Attachment: Decodable {
   case media(Attachment.Media)
   case medias([Attachment.Media])
   case url(Attachment.URL)
-  case giphy(String)
-  case youtube(String)
+  case giphy(Attachment.Giphy)
+  case youtube(Attachment.Youtube)
   case unknown(key: String?)
   
   public init(from decoder: Decoder) throws {
@@ -37,13 +37,13 @@ public enum Attachment: Decodable {
         self = .unknown(key: key)
       }
     case "giphy":
-      if let value = try? container.decode(String.self, forKey: AnyKey(stringValue: "value")!) {
+      if let value = try? container.decode(Attachment.Giphy.self, forKey: AnyKey(stringValue: "value")!) {
         self = .giphy(value)
       } else {
         self = .unknown(key: key)
       }
     case "youtube":
-      if let value = try? container.decode(String.self, forKey: AnyKey(stringValue: "value")!) {
+      if let value = try? container.decode(Attachment.Youtube.self, forKey: AnyKey(stringValue: "value")!) {
         self = .youtube(value)
       } else {
         self = .unknown(key: key)
