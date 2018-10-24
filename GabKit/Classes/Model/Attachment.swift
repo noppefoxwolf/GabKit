@@ -13,11 +13,14 @@ public enum Attachment: Decodable {
   case url(Attachment.URL)
   case giphy(String)
   case youtube(String)
-  case unknown
+  case unknown(key: String?)
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: AnyKey.self)
-    let key = try container.decode(String.self, forKey: AnyKey(stringValue: "type")!)
+    guard let key = try? container.decode(String.self, forKey: AnyKey(stringValue: "type")!) else {
+      self = .unknown(key: nil)
+      return
+    }
     switch key {
     case "media":
       if let value = try? container.decode(Attachment.Media.self, forKey: AnyKey(stringValue: "value")!) {
@@ -25,28 +28,28 @@ public enum Attachment: Decodable {
       } else if let value = try? container.decode([Attachment.Media].self, forKey: AnyKey(stringValue: "value")!) {
         self = .medias(value)
       } else {
-        self = .unknown
+        self = .unknown(key: key)
       }
     case "url":
       if let value = try? container.decode(Attachment.URL.self, forKey: AnyKey(stringValue: "value")!) {
         self = .url(value)
       } else {
-        self = .unknown
+        self = .unknown(key: key)
       }
     case "giphy":
       if let value = try? container.decode(String.self, forKey: AnyKey(stringValue: "value")!) {
         self = .giphy(value)
       } else {
-        self = .unknown
+        self = .unknown(key: key)
       }
     case "youtube":
       if let value = try? container.decode(String.self, forKey: AnyKey(stringValue: "value")!) {
         self = .youtube(value)
       } else {
-        self = .unknown
+        self = .unknown(key: key)
       }
     default:
-      self = .unknown
+      self = .unknown(key: key)
     }
   }
 }
