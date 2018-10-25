@@ -111,8 +111,9 @@ extension Gab {
   internal func upload<T: Decodable>(path: String,
                                      file fileData: Data,
                                      baseURL: GabURL = .api,
+                                     progressHandler: UploadProgress? = nil,
                                      completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
-    _upload(url: baseURL.rawValue + path, file: fileData) { (data, response, error) in
+    _upload(url: baseURL.rawValue + path, file: fileData, progressHandler: progressHandler) { (data, response, error) in
       var object: T? = nil
       if let data = data {
         let decoder = JSONDecoder()
@@ -125,13 +126,16 @@ extension Gab {
   
   private func _upload(url urlString: String,
                        file fileData: Data,
+                       progressHandler: UploadProgress?,
                      completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
     let url = URL(string: urlString)!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     let config = URLSessionConfiguration.default
     config.httpAdditionalHeaders = headers(contentType: .multipart)
-    let session = URLSession(configuration: config)
+    let session = URLSession(configuration: config,
+                             delegate: ProgressDelegator(didUload: progressHandler),
+                             delegateQueue: .main)
     session.uploadTask(with: request, from: httpBody(fileData), completionHandler: completionHandler).resume()
   }
   
@@ -150,3 +154,32 @@ extension Gab {
   }
 }
 
+
+
+fileprivate class ProgressDelegator: NSObject, URLSessionTaskDelegate {
+  private let didUload: UploadProgress?
+  private let progress: Progress
+  
+  init(didUload: UploadProgress?) {
+    self.didUload = didUload
+    self.progress = Progress()
+  }
+  
+  func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    didUload?(progress)
+    completionHandler(.performDefaultHandling, nil)
+  }
+  
+  func urlSession(_ session: URLSession, task: URLSessionTask,
+                  didSendBodyData bytesSent: Int64,
+                  totalBytesSent: Int64,
+                  totalBytesExpectedToSend: Int64) {
+    progress.completedUnitCount = totalBytesSent
+    progress.totalUnitCount = totalBytesExpectedToSend
+    didUload?(progress)
+  }
+  
+  func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+    didUload?(progress)
+  }
+}

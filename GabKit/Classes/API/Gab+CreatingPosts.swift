@@ -45,9 +45,13 @@ extension Gab {
   }
   
   public func uploadImage(_ image: Image,
+                          progress: UploadProgress? = nil,
                           success: UploadSuccess? = nil,
                           failure: Failure? = nil) {
-    upload(path: "media-attachments/images", file: image.pngData()!) { (uploadResponse: UploadFileResponse?, response, error) in
+    upload(path: "media-attachments/images",
+           file: image.pngData()!,
+           progressHandler: progress)
+    { (uploadResponse: UploadFileResponse?, response, error) in
       if let uploadResponse = uploadResponse {
         success?(uploadResponse)
       } else if let error = error {

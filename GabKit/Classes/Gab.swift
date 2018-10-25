@@ -47,6 +47,7 @@ public typealias ActionSuccess = Success<ActionResponse>
 public typealias ModerationLogsSuccess = Success<ModerationLogsResponse>
 public typealias UploadSuccess = Success<UploadFileResponse>
 public typealias Failure = ((Error) -> Void)
+public typealias UploadProgress = ((Progress) -> Void)
 
 public final class Gab {
   internal let clientID: String
