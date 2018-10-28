@@ -8,11 +8,39 @@
 import Foundation
 
 extension Gab {
-  func createQuote() {}
-  func createReply() {}
+  public func createQuote(_ body: String,
+                   mediaAttachments: [String]? = nil,
+                   quotePostID: Int,
+                   nsfw: Bool = false,
+                   success: PostSuccess? = nil,
+                   failure: Failure? = nil) {
+    publish(body,
+            mediaAttachments: mediaAttachments,
+            replyTo: quotePostID,
+            isQuote: true,
+            nsfw: nsfw,
+            success: success,
+            failure: failure)
+  }
+  
+  public func createReply(_ body: String,
+                   mediaAttachments: [String]? = nil,
+                   replyTo: Int,
+                   nsfw: Bool = false,
+                   success: PostSuccess? = nil,
+                   failure: Failure? = nil) {
+    publish(body,
+            mediaAttachments: mediaAttachments,
+            replyTo: replyTo,
+            nsfw: nsfw,
+            success: success,
+            failure: failure)
+  }
   
   public func publish(_ body: String,
                       mediaAttachments: [String]? = nil,
+                      replyTo: Int? = nil,
+                      isQuote: Bool = false,
                       nsfw: Bool = false,
                       premiumMinTier: Int? = nil,
                       group: String? = nil,
@@ -21,6 +49,8 @@ extension Gab {
                       success: PostSuccess? = nil,
                       failure: Failure? = nil) {
     var params: [String : Any] = ["body" : body, "nsfw" : nsfw]
+    params["reply_to"] = replyTo
+    params["is_quote"] = isQuote
     params["premium_min_tier"] = premiumMinTier
     params["group"] = group
     params["topic"] = topic
