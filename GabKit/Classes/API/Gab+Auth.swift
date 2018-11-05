@@ -10,24 +10,32 @@ import SafariServices
 extension Gab {
   public func authorize(withPresentingFrom presenting: UIViewController,
                         success: AuthSuccess? = nil, failure: Failure? = nil) {
+    observeAuthorize(handled: {
+      presenting.presentedViewController?.dismiss(animated: true, completion: nil)
+    }, success: success, failure: failure)
+    let vc = SFSafariViewController(url: authorizeURL())
+    presenting.present(vc, animated: true, completion: nil)
+  }
+  
+  public func observeAuthorize(handled: (() -> Void)? = nil, success: AuthSuccess? = nil, failure: Failure? = nil) {
     NotificationCenter.default.addObserver(forName: .gabCallback, object: nil, queue: .main) { (notification) in
       NotificationCenter.default.removeObserver(self)
-      presenting.presentedViewController?.dismiss(animated: true, completion: nil)
+      handled?()
       guard let url = notification.userInfo?[CallbackNotification.optionsURLKey] as? URL else { return }
       let urlComponents = URLComponents(string: url.absoluteString)
       guard let code = urlComponents?.queryItems?.first(where: { $0.name == "code" })?.value else { return }
       self.fetchToken(code: code, success: success, failure: failure)
     }
-    
+  }
+  
+  public func authorizeURL() -> URL {
     var urlComponents = URLComponents(string: "https://api.gab.com/oauth/authorize")!
     let responseType = URLQueryItem(name: "response_type", value: "code")
     let clientID = URLQueryItem(name: "client_id", value: self.clientID)
     let scopeValue = self.scopes.map({ $0.rawValue }).joined(separator: " ")
     let scope = URLQueryItem(name: "scope", value: scopeValue)
     urlComponents.queryItems = [responseType, clientID, scope]
-    
-    let vc = SFSafariViewController(url: urlComponents.url!)
-    presenting.present(vc, animated: true, completion: nil)
+    return urlComponents.url!
   }
   
   public static func handleURL(_ url: URL) {
