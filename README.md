@@ -94,9 +94,13 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
 - [ ] support osx
 - [ ] support linux
 - [x] support cocoapods
-- [ ] support carthage
+- [x] support carthage
 - [ ] support swift package manager
+- [x] codable
 
 - supported attachment type
   - [x] media
+  - [x] media array
   - [x] url
+  - [x] giphy
+  - [x] youtube
