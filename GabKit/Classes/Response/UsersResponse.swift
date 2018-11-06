@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class UsersResponse: Decodable {
+public class UsersResponse: Codable {
   public let data: [User]
   public let noMore: Bool
 }

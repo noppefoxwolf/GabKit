@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ModerationLog: Decodable {
+public class ModerationLog: Codable {
   public let id: String
   public let createdAt: Date
   public let type: String

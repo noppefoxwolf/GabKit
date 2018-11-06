@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class UserDetail: Decodable, UserType {
+public class UserDetail: Codable, UserType {
   public let id: Int
   public let name: String
   public let username: String

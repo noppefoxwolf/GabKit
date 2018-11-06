@@ -20,7 +20,7 @@ public protocol UserType {
   var isPremium: Bool { get }
 }
 
-public class User: Decodable, UserType {
+public class User: Codable, UserType {
   public let id: Int
   public let name: String
   public let username: String

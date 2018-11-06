@@ -22,7 +22,7 @@ public protocol GroupType {
   var users: UsersResponse { get }
 }
 
-public class Group: Decodable, GroupType {
+public class Group: Codable, GroupType {
   public let id: String
   public let title: String
   public let pinnedPostId: String

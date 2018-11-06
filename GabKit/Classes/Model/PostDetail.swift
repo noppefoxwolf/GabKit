@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PostDetail: Decodable {
+public class PostDetail: Codable {
   public let id: Int
   public let createdAt: Date
   public let revisedAt: Date?

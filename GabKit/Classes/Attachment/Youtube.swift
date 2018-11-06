@@ -8,7 +8,7 @@
 import Foundation
 
 extension Attachment {
-  public class Youtube: Decodable {
+  public class Youtube: Codable {
     public let id: String
     public var url: String {
       return "https://www.youtube.com/watch?v=\(id)"
@@ -20,6 +20,11 @@ extension Attachment {
     required public init(from decoder: Decoder) throws {
       let container = try decoder.singleValueContainer()
       self.id = try container.decode(String.self)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      try container.encode(id)
     }
   }
 }

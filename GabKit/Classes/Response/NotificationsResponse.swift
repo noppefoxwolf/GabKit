@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class NotificationsResponse: Decodable {
+public class NotificationsResponse: Codable {
   public let data: [Notification]
   public let noMore: Bool
 }

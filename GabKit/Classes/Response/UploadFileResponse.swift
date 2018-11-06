@@ -7,6 +7,6 @@
 
 import Foundation
 
-public class UploadFileResponse: Decodable {
+public class UploadFileResponse: Codable {
   public let id: String
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension Attachment {
-  public class URL: Decodable {
+  public class URL: Codable {
     public let image: String
     public let source: String
     public let description: String

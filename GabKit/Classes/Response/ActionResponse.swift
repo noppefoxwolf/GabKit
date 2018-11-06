@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ActionResponse: Decodable {
+public class ActionResponse: Codable {
   public let state: String
   public let message: String
 }

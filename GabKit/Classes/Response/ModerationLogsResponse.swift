@@ -7,6 +7,6 @@
 
 import Foundation
 
-public class ModerationLogsResponse: Decodable {
+public class ModerationLogsResponse: Codable {
   public let data: [ModerationLog]
 }

@@ -7,6 +7,6 @@
 
 import Foundation
 
-public class GroupsResponse: Decodable {
+public class GroupsResponse: Codable {
   public let data: [Group]
 }

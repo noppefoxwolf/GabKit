@@ -8,7 +8,7 @@
 import Foundation
 
 extension Attachment {
-  public class Media: Decodable {
+  public class Media: Codable {
     public let id: String
     public let urlThumbnail: String
     public let urlFull: String

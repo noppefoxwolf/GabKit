@@ -240,4 +240,43 @@ class AttachmentTypeTests: XCTestCase {
       XCTFail(String(describing: error))
     }
   }
+  
+  func testPostResponseTypeCodable() {
+    struct Sample: Codable {
+      let type: PostResponseType
+    }
+    let json = """
+{"type":"post"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, .post)
+    let encoded = try! JSONEncoder().encode(sample)
+    XCTAssertEqual(String(data: encoded, encoding: .utf8), "{\"type\":\"post\"}")
+  }
+  
+  func testUnknownPostResponseTypeCodable() {
+    struct Sample: Codable {
+      let type: PostResponseType
+    }
+    let json = """
+{"type":"retweet"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.type, .unknown("retweet"))
+    let encoded = try! JSONEncoder().encode(sample)
+    XCTAssertEqual(String(data: encoded, encoding: .utf8), "{\"type\":\"retweet\"}")
+  }
+  
+  func testAttachmentYoutubeCodable() {
+    struct Sample: Codable {
+      let attachment: Attachment.Youtube
+    }
+    let json = """
+{"attachment":"xxxxx"}
+"""
+    let sample = try! JSONDecoder().decode(Sample.self, from: json.data(using: .utf8)!)
+    XCTAssertEqual(sample.attachment.id, "xxxxx")
+    let encoded = try! JSONEncoder().encode(sample)
+    XCTAssertEqual(String(data: encoded, encoding: .utf8), "{\"attachment\":\"xxxxx\"}")
+  }
 }

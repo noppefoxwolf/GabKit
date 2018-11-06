@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Attachment: Decodable {
+public enum Attachment: Codable {
   case media(Attachment.Media)
   case medias([Attachment.Media])
   case url(Attachment.URL)
@@ -50,6 +50,30 @@ public enum Attachment: Decodable {
       }
     default:
       self = .unknown(key: key)
+    }
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: AnyKey.self)
+    switch self {
+    case .media(let media):
+      try container.encode("media", forKey: AnyKey(stringValue: "type")!)
+      try container.encode(media, forKey: AnyKey(stringValue: "value")!)
+    case .medias(let medias):
+      try container.encode("media", forKey: AnyKey(stringValue: "type")!)
+      try container.encode(medias, forKey: AnyKey(stringValue: "value")!)
+    case .url(let url):
+      try container.encode("url", forKey: AnyKey(stringValue: "type")!)
+      try container.encode(url, forKey: AnyKey(stringValue: "value")!)
+    case .giphy(let giphy):
+      try container.encode("giphy", forKey: AnyKey(stringValue: "type")!)
+      try container.encode(giphy, forKey: AnyKey(stringValue: "value")!)
+    case .youtube(let youtube):
+      try container.encode("youtube", forKey: AnyKey(stringValue: "type")!)
+      try container.encode(youtube, forKey: AnyKey(stringValue: "value")!)
+    case .unknown(let key):
+      try container.encodeIfPresent(key, forKey: AnyKey(stringValue: "type")!)
+      try container.encodeNil(forKey: AnyKey(stringValue: "value")!)
     }
   }
 }

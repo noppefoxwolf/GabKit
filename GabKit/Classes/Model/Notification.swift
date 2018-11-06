@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Notification: Decodable {
+public class Notification: Codable {
   public let id: String
   public let createdAt: Date
   public let url: String

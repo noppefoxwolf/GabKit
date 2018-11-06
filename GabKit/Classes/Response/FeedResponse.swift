@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class FeedResponse: Decodable {
+public class FeedResponse: Codable {
   public let data: [PostResponse]
   public let noMore: Bool
 }

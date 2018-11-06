@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class RelatedUsersResponse: Decodable {
+public class RelatedUsersResponse: Codable {
   public let data: [RelatedUserDetail]
   public let count: Int
   public let noMore: Bool

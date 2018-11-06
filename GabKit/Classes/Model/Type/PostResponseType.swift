@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PostResponseType: Decodable, Equatable {
+public enum PostResponseType: Codable, Equatable {
   case post
   case repost
   case unknown(String)
@@ -22,6 +22,18 @@ public enum PostResponseType: Decodable, Equatable {
       self = .repost
     default:
       self = .unknown(key)
+    }
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .post:
+      try container.encode("post")
+    case .repost:
+      try container.encode("repost")
+    case .unknown(let key):
+      try container.encode(key)
     }
   }
 }

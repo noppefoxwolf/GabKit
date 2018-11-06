@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NotificationType: Decodable, Equatable {
+public enum NotificationType: Codable, Equatable {
   case repost
   case like
   case follow
@@ -28,6 +28,22 @@ public enum NotificationType: Decodable, Equatable {
       self = .mention
     default:
       self = .unknown(key)
+    }
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .repost:
+      try container.encode("repost")
+    case .like:
+      try container.encode("like")
+    case .follow:
+      try container.encode("follow")
+    case .mention:
+      try container.encode("mention")
+    case .unknown(let key):
+      try container.encode(key)
     }
   }
 }

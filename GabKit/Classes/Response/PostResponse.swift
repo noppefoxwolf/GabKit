@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PostResponse: Decodable {
+public class PostResponse: Codable {
   public let id: String
   public let publishedAt: Date
   public let type: PostResponseType

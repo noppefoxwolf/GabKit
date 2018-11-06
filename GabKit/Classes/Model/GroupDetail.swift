@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GroupDetail: Decodable, GroupType {
+public class GroupDetail: Codable, GroupType {
   public let id: String
   public let title: String
   public let pinnedPostId: String
