@@ -104,3 +104,5 @@ GabKit is available under the MIT license. See the LICENSE file for more info.
   - [x] url
   - [x] giphy
   - [x] youtube
+
+- [x] undocumented api

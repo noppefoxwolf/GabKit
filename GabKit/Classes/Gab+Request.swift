@@ -20,10 +20,15 @@ extension Gab {
     }
   }
   
-  private func headers(contentType: ContentType = .json) -> [String : String] {
+  private func headers(contentType: ContentType = .json,
+                       authorizationMode: AuthorizationMode = .bearer) -> [String : String] {
     var headers: [String : String] = ["Content-Type": contentType.value]
-    if let accessToken = credential?.accessToken {
+    guard let accessToken = credential?.accessToken else { return headers }
+    switch authorizationMode {
+    case .bearer:
       headers["Authorization"] = "Bearer \(accessToken)"
+    case .cookie:
+      headers["Set-Cookie"] = "leravel_session=\(accessToken)"
     }
     return headers
   }
@@ -31,8 +36,12 @@ extension Gab {
   internal func get<T: Decodable>(path: String,
                                   baseURL: GabURL = .api,
                                   params: [String : String?] = [:],
+                                  authorizationMode: AuthorizationMode = .bearer,
                                   completionHandler: @escaping ((T?, URLResponse?, Error?) -> Void)) {
-    _get(url: baseURL.rawValue + path, params: params, completionHandler: { (data, response, error) in
+    _get(url: baseURL.rawValue + path,
+         params: params,
+         authorizationMode: authorizationMode,
+         completionHandler: { (data, response, error) in
       var error: Error? = error
       var object: T? = nil
       if let data = data {
@@ -51,12 +60,13 @@ extension Gab {
   
   private func _get(url urlString: String,
                     params: [String : String?],
+                    authorizationMode: AuthorizationMode,
                     completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
     var urlComponents = URLComponents(string: urlString)!
     urlComponents.queryItems = params.compactMap({ URLQueryItem(name: $0, value: $1) })
     var request = URLRequest(url: urlComponents.url!)
     request.httpMethod = "GET"
-    request.allHTTPHeaderFields = headers()
+    request.allHTTPHeaderFields = headers(authorizationMode: authorizationMode)
     URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
   }
   

@@ -25,7 +25,13 @@ public enum Scope: String, Codable {
 
 public enum GabURL: String {
   case api = "https://api.gab.com/v1.0/"
+  case webAPI = "https://gab.com/api/"
   case outh = "https://api.gab.com/oauth/"
+}
+
+internal enum AuthorizationMode {
+  case bearer
+  case cookie
 }
 
 extension Foundation.Notification.Name {
@@ -48,6 +54,9 @@ public typealias ModerationLogsSuccess = Success<ModerationLogsResponse>
 public typealias UploadSuccess = Success<UploadFileResponse>
 public typealias Failure = ((Error) -> Void)
 public typealias UploadProgress = ((Progress) -> Void)
+
+public typealias _TopicSuccess = Success<TopicResponse>
+public typealias _UserFeedSuccess = Success<_UserFeedResponse>
 
 public final class Gab {
   internal let clientID: String
