@@ -19,7 +19,7 @@ public class GroupDetail: Codable, GroupType {
   public let canJoin: Bool
   public let role: String?
   public let isPrivate: Bool
-  public let users: UsersResponse
+  public let users: UsersData
   
   public let isFavorited: Bool
 }

@@ -19,7 +19,7 @@ public protocol GroupType {
   var canJoin: Bool { get }
   var role: String? { get }
   var isPrivate: Bool { get }
-  var users: UsersResponse { get }
+  var users: UsersData { get }
 }
 
 public class Group: Codable, GroupType {
@@ -34,7 +34,7 @@ public class Group: Codable, GroupType {
   public let canJoin: Bool
   public let role: String?
   public let isPrivate: Bool
-  public let users: UsersResponse
+  public let users: UsersData
 }
 
 
