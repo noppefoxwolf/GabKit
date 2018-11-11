@@ -22,7 +22,7 @@ extension Gab {
   
   //topics
   public func _getTopics(success: _TopicSuccess? = nil, failure: Failure? = nil) {
-    get(path: "topics", params: [:], authorizationMode: .cookie) { (topics: TopicResponse?, response, error) in
+    get(path: "topics", baseURL: .webAPI, params: [:], authorizationMode: .cookie) { (topics: TopicResponse?, response, error) in
       if let topics = topics {
         success?(topics)
       } else if let error = error {
@@ -35,7 +35,7 @@ extension Gab {
   //params[sort] = date
   //params[timeframe] = week
   public func _getGroupFeed(groupID: String, success: FeedSuccess? = nil, failure: Failure? = nil) {
-    get(path: "groups/\(groupID)/feed", params: [:], authorizationMode: .cookie) { (feed: FeedResponse?, response, error) in
+    get(path: "groups/\(groupID)/feed", baseURL: .webAPI, params: [:], authorizationMode: .cookie) { (feed: FeedResponse?, response, error) in
       if let feed = feed {
         success?(feed)
       } else if let error = error {
@@ -45,7 +45,7 @@ extension Gab {
   }
   
   public func _getUserFeed(username: String, success: _UserFeedSuccess? = nil, failure: Failure? = nil) {
-    get(path: "feed/\(username)", params: [:], authorizationMode: .cookie) { (feed: _UserFeedResponse?, response, error) in
+    get(path: "feed/\(username)", baseURL: .webAPI, params: [:], authorizationMode: .cookie) { (feed: _UserFeedResponse?, response, error) in
       if let feed = feed {
         success?(feed)
       } else if let error = error {
@@ -55,7 +55,7 @@ extension Gab {
   }
   
   public func _getUserCommentFeed(username: String, success: _UserFeedSuccess? = nil, failure: Failure? = nil) {
-    get(path: "feed/\(username)/comments", params: [:], authorizationMode: .cookie) { (feed: _UserFeedResponse?, response, error) in
+    get(path: "feed/\(username)/comments", baseURL: .webAPI, params: [:], authorizationMode: .cookie) { (feed: _UserFeedResponse?, response, error) in
       if let feed = feed {
         success?(feed)
       } else if let error = error {
