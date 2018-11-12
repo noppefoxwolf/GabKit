@@ -78,6 +78,26 @@ public enum Attachment: Codable {
   }
 }
 
+extension Attachment: Equatable {
+  public static func == (lhs: Attachment, rhs: Attachment) -> Bool {
+    if case let .giphy(lgiphy) = lhs, case let .giphy(rgiphy) = rhs {
+      return lgiphy == rgiphy
+    } else if case let .youtube(lyoutube) = lhs, case let .youtube(ryoutube) = rhs {
+      return lyoutube == ryoutube
+    } else if case let .media(lmedia) = lhs, case let .media(rmedia) = rhs {
+      return lmedia == rmedia
+    } else if case let .medias(lmedias) = lhs, case let .medias(rmedias) = rhs {
+      return lmedias == rmedias
+    } else if case let .url(lurl) = lhs, case let .url(rurl) = rhs {
+      return lurl == rurl
+    } else if case let .unknown(lkey) = lhs, case let .unknown(rkey) = rhs {
+      return lkey == rkey
+    } else {
+      return false
+    }
+  }
+}
+
 struct AnyKey: CodingKey {
   var stringValue: String
   var intValue: Int?

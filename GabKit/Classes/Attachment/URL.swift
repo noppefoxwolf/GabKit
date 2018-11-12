@@ -16,3 +16,14 @@ extension Attachment {
     public let title: String
   }
 }
+
+extension Attachment.URL: Equatable {
+  public static func == (lhs: Attachment.URL, rhs: Attachment.URL) -> Bool { 
+    guard lhs.image == rhs.image else { return false }
+    guard lhs.source == rhs.source else { return false }
+    guard lhs.description == rhs.description else { return false }
+    guard lhs.url == rhs.url else { return false }
+    guard lhs.title == rhs.title else { return false }
+    return true
+  }
+}

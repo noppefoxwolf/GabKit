@@ -17,3 +17,13 @@ extension Attachment {
   }
 }
 
+extension Attachment.Media: Equatable {
+  public static func == (lhs: Attachment.Media, rhs: Attachment.Media) -> Bool {
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.urlThumbnail == rhs.urlThumbnail else { return false }
+    guard lhs.urlFull == rhs.urlFull else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
+    return true
+  }
+}

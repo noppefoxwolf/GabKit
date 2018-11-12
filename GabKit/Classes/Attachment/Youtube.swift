@@ -28,3 +28,9 @@ extension Attachment {
     }
   }
 }
+
+extension Attachment.Youtube: Equatable {
+  public static func == (lhs: Attachment.Youtube, rhs: Attachment.Youtube) -> Bool {
+    return lhs.id == rhs.id
+  }
+}

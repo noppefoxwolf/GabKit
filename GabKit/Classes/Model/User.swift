@@ -33,3 +33,19 @@ public class User: Codable, UserType {
   public let isPremium: Bool
 }
 
+extension User: Equatable {
+  public static func == (lhs: User, rhs: User) -> Bool {
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.name == rhs.name else { return false }
+    guard lhs.username == rhs.username else { return false }
+    guard lhs.pictureUrl == rhs.pictureUrl else { return false }
+    guard lhs.verified == rhs.verified else { return false }
+    guard lhs.isDonor == rhs.isDonor else { return false }
+    guard lhs.isInvestor == rhs.isInvestor else { return false }
+    guard lhs.isPro == rhs.isPro else { return false }
+    guard lhs.isPrivate == rhs.isPrivate else { return false }
+    guard lhs.isPremium == rhs.isPremium else { return false }
+    return true
+  }
+}
+

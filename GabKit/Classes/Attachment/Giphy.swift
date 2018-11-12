@@ -22,3 +22,9 @@ extension Attachment {
     }
   }
 }
+
+extension Attachment.Giphy: Equatable {
+  public static func == (lhs: Attachment.Giphy, rhs: Attachment.Giphy) -> Bool {
+    return lhs.url == rhs.url
+  }
+}

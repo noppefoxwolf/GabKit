@@ -37,5 +37,22 @@ public class Group: Codable, GroupType {
   public let users: UsersData
 }
 
+extension Group: Equatable {
+  public static func == (lhs: Group, rhs: Group) -> Bool {
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.title == rhs.title else { return false }
+    guard lhs.pinnedPostId == rhs.pinnedPostId else { return false }
+    guard lhs.archivedAt == rhs.archivedAt else { return false }
+    guard lhs.coverUrl == rhs.coverUrl else { return false }
+    guard lhs.description == rhs.description else { return false }
+    guard lhs.userCount == rhs.userCount else { return false }
+    guard lhs.isJoined == rhs.isJoined else { return false }
+    guard lhs.canJoin == rhs.canJoin else { return false }
+    guard lhs.role == rhs.role else { return false }
+    guard lhs.isPrivate == rhs.isPrivate else { return false }
+    guard lhs.users == rhs.users else { return false }
+    return true
+  }
+}
 
 

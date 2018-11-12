@@ -17,3 +17,17 @@ public class Notification: Codable {
   public let post: Post?
   public let actuser: RelatedUserDetail?
 }
+
+extension Notification: Equatable {
+  public static func == (lhs: Notification, rhs: Notification) -> Bool {
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.createdAt == rhs.createdAt else { return false }
+    guard lhs.url == rhs.url else { return false }
+    guard lhs.type == rhs.type else { return false }
+    guard lhs.message == rhs.message else { return false }
+    guard lhs.read == rhs.read else { return false }
+    guard lhs.post == rhs.post else { return false }
+    guard lhs.actuser == rhs.actuser else { return false }
+    return true
+  }
+}

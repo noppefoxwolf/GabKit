@@ -30,3 +30,29 @@ public class RelatedUserDetail: Codable, UserType {
   public let isAccessible: Bool
   public let followPending: Bool
 }
+
+extension RelatedUserDetail: Equatable {
+  public static func == (lhs: RelatedUserDetail, rhs: RelatedUserDetail) -> Bool {
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.name == rhs.name else { return false }
+    guard lhs.username == rhs.username else { return false }
+    guard lhs.pictureUrl == rhs.pictureUrl else { return false }
+    guard lhs.verified == rhs.verified else { return false }
+    guard lhs.isPro == rhs.isPro else { return false }
+    guard lhs.isDonor == rhs.isDonor else { return false }
+    guard lhs.isInvestor == rhs.isInvestor else { return false }
+    guard lhs.isPrivate == rhs.isPrivate else { return false }
+    guard lhs.isPremium == rhs.isPremium else { return false }
+    guard lhs.createdAtMonthLabel == rhs.createdAtMonthLabel else { return false }
+    guard lhs.followerCount == rhs.followerCount else { return false }
+    guard lhs.followingCount == rhs.followingCount else { return false }
+    guard lhs.postCount == rhs.postCount else { return false }
+    guard lhs.pictureUrlFull == rhs.pictureUrlFull else { return false }
+    guard lhs.following == rhs.following else { return false }
+    guard lhs.followed == rhs.followed else { return false }
+    guard lhs.isTippable == rhs.isTippable else { return false }
+    guard lhs.isAccessible == rhs.isAccessible else { return false }
+    guard lhs.followPending == rhs.followPending else { return false }
+    return true
+  }
+}
